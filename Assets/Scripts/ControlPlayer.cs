@@ -61,20 +61,29 @@ public class ControlPlayer : MonoBehaviour
 
     private void AnimPlayer()
     {
-        if (Input.GetKey(KeyCode.LeftShift))
+
+        if (velocidad == 0f){
+            anim.SetBool("Idle", true);
+        }
+
+        else if (Input.GetKey(KeyCode.LeftShift))
         {
             velocidad = 10f;
             anim.SetBool("IsRunning", true);
+            anim.SetBool("IsWalking", false);
+            anim.SetBool("Idle", false);
         }
-        else
+        else if (!Input.GetKey(KeyCode.LeftShift) && velocidad > 0f)
         {
             velocidad = 5f;
             anim.SetBool("IsWalking", true);
+            anim.SetBool("IsRunning", false);
+            anim.SetBool("Idle", false);
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            anim.SetBool("Jump", true);
+            anim.SetBool("IsJumping", true);
         }
 
         if (Input.GetKey(KeyCode.LeftControl))

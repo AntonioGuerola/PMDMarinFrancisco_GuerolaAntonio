@@ -17,7 +17,7 @@ public class ControlPlayer : MonoBehaviour
     public Animator animDoor;
     Animator anim;
 
-    public GameObject camaraItem, camaraDoor, luzMechero;
+    public GameObject camaraItem, camaraDoor, luzMechero, Mechero;
 
     bool abrirPuerta = true;
 
@@ -90,12 +90,14 @@ public class ControlPlayer : MonoBehaviour
         {
             anim.SetBool("LightOn", true);
             luzMechero.SetActive(true);
+            Mechero.SetActive(true);
 
         }
         else
         {
             anim.SetBool("LightOn", false);
             luzMechero.SetActive(false);
+            Mechero.SetActive(false);
 
         }
     }

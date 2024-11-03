@@ -8,6 +8,9 @@ TagManager:
   - Door
   - Item
   - luzMechero
+  - Mechero
+  - Car
+  - BusStop
   layers:
   - Default
   - TransparentFX

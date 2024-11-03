@@ -17,7 +17,7 @@ public class ControlPlayer : MonoBehaviour
     public Animator animDoor;
     Animator anim;
 
-    public GameObject camaraItem, camaraDoor, luzMechero;
+    public GameObject camaraItem, camaraDoor, luzMechero, car;
 
     bool abrirPuerta = true;
 
@@ -118,6 +118,11 @@ public class ControlPlayer : MonoBehaviour
             camaraDoor.SetActive(true);
             Invoke("InteriorHospital", 3f);
         }
+
+        if((objeto.gameObject.tag == "car") && (Input.GetKeyDown(KeyCode.F))){
+            car.gameObject.SetActive(false);
+        }
+
     }
 
     private void ApagarCamaraItem()

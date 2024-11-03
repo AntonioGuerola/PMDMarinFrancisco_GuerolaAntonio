@@ -984,8 +984,8 @@ GameObject:
   - component: {fileID: 25669330859513353}
   - component: {fileID: 5535847502630196865}
   - component: {fileID: 7787737493531929320}
-  - component: {fileID: 7023247113386776304}
-  - component: {fileID: 8993982836123361383}
+  - component: {fileID: 8019871486997194838}
+  - component: {fileID: 2768815481346654285}
   m_Layer: 0
   m_Name: Padre_modelo 1
   m_TagString: Untagged
@@ -1063,7 +1063,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &7023247113386776304
+--- !u!114 &8019871486997194838
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1076,11 +1076,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animDoor: {fileID: 0}
-  camaraItem: {fileID: 0}
+  camaraItem: {fileID: 7362814402614184976}
   camaraDoor: {fileID: 0}
-  luzMechero: {fileID: 0}
-  car: {fileID: 0}
---- !u!114 &8993982836123361383
+  luzMechero: {fileID: 3201563244850915758}
+--- !u!114 &2768815481346654285
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1093,10 +1092,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enable: 1
-  amplitude: 0.008
-  frequency: 8
-  _camera: {fileID: 0}
-  _cameraHolder: {fileID: 0}
+  amplitude: 0.004
+  frequency: 10
+  _camera: {fileID: 5358757565398871636}
+  _cameraHolder: {fileID: 25669330859513353}
 --- !u!1 &3162242612954673936
 GameObject:
   m_ObjectHideFlags: 0
@@ -3082,6 +3081,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f23d7c234f119564792d1b6bc95be899, type: 3}
+--- !u!1 &3201563244850915758 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -8700617353114198275, guid: f23d7c234f119564792d1b6bc95be899, type: 3}
+  m_PrefabInstance: {fileID: 3111721619367556947}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3217178921266254008 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f23d7c234f119564792d1b6bc95be899, type: 3}

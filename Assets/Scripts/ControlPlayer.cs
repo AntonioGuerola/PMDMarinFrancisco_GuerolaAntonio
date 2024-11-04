@@ -3,14 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ControlPlayer : MonoBehaviour
 {
+    [SerializeField] private Image pressFItem;
+    [SerializeField] private Image closeDoorGirl;
+    [SerializeField] private Image pressFDoor;
 
     CharacterController controlador;
     float velocidad;
     float gravedad;
     Vector3 direccion;
+
+    int item;
 
     float salto;
 
@@ -20,6 +26,7 @@ public class ControlPlayer : MonoBehaviour
     public GameObject camaraItem, camaraDoor, luzMechero, Mechero, Car, Player, MainCamera;
 
     bool abrirPuerta = true;
+    bool isInCloseDoorGirlTrigger = false;
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +35,7 @@ public class ControlPlayer : MonoBehaviour
         velocidad = 5f;
         gravedad = -9.8f;
         salto = 2.5f;
+        item = 0;
 
         anim = GetComponent<Animator>();
     }
@@ -56,24 +64,40 @@ public class ControlPlayer : MonoBehaviour
 
             AnimPlayer();
         }
+
+        if (isInCloseDoorGirlTrigger && Input.GetKeyDown(KeyCode.F))
+        {
+            if (item == 0)
+            {
+                pressFDoor.enabled = false;
+                closeDoorGirl.enabled = true; // Muestra mensaje de advertencia
+            }
+            else if (item == 1)
+            {
+                pressFDoor.enabled = false;
+                closeDoorGirl.enabled = false;
+                Invoke("toCredits", 1f); // Cambia de escena
+            }
+        }
     }
 
 
     private void AnimPlayer()
     {
 
-        if (velocidad == 0f){
+        if (velocidad == 0f)
+        {
             anim.SetBool("Idle", true);
         }
 
-        else if (Input.GetKey(KeyCode.LeftShift))
+        else if (Input.GetKey(KeyCode.R))
         {
             velocidad = 10f;
             anim.SetBool("IsRunning", true);
             anim.SetBool("IsWalking", false);
             anim.SetBool("Idle", false);
         }
-        else if (!Input.GetKey(KeyCode.LeftShift) && velocidad > 0f)
+        else if (!Input.GetKey(KeyCode.R) && velocidad > 0f)
         {
             velocidad = 5f;
             anim.SetBool("IsWalking", true);
@@ -104,8 +128,10 @@ public class ControlPlayer : MonoBehaviour
 
     void OnTriggerStay(Collider objeto)
     {
-        if ((objeto.gameObject.tag == "Item") && (Input.GetKeyDown(KeyCode.E)))
+        if ((objeto.gameObject.tag == "Item") && (Input.GetKeyDown(KeyCode.F)))
         {
+            item = 1;
+            pressFItem.enabled = false;
             anim.SetTrigger("TakingItem");
             camaraItem.SetActive(true);
             Destroy(objeto.gameObject, 1f);
@@ -121,15 +147,37 @@ public class ControlPlayer : MonoBehaviour
             Invoke("InteriorHospital", 3f);
         }
 
-        if ((objeto.gameObject.tag == "Car") && (Input.GetKeyDown(KeyCode.F))){
+        if ((objeto.gameObject.tag == "Car") && (Input.GetKeyDown(KeyCode.F)))
+        {
             Player.SetActive(false);
             MainCamera.SetActive(true);
         }
+
+        if (objeto.gameObject.tag == "CloseDoorGirl")
+        {
+            pressFDoor.enabled = true;
+            isInCloseDoorGirlTrigger = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider objeto)
+    {
+        /*if (objeto.gameObject.CompareTag("CloseDoorGirl"))
+        {
+            pressFDoor.enabled = false;
+            closeDoorGirl.enabled = false;
+            isInCloseDoorGirlTrigger = false;
+        }*/
     }
 
     private void ApagarCamaraItem()
     {
         camaraItem.SetActive(false);
+    }
+
+    private void toCredits()
+    {
+        SceneManager.LoadScene("Creditos");
     }
 
     private void InteriorHospital()

@@ -6,20 +6,33 @@ using UnityEngine.SceneManagement;
 public class Jugar : MonoBehaviour
 {
 
+    private bool hasSkipped = false;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        // Llama al método `JugarJuego` después de 35 segundos, solo si el usuario no ha saltado antes
+        Invoke("JugarJuego", 35);
     }
 
     // Update is called once per frame
     void Update()
     {
-        Invoke("JugarJuego", 35);
+        // Si el usuario presiona la tecla Tab y no ha saltado ya
+        if (Input.GetKeyDown(KeyCode.Tab) && !hasSkipped)
+        {
+            hasSkipped = true;
+            JugarJuego();
+        }
     }
 
     private void JugarJuego()
     {
-        SceneManager.LoadScene("Juego");
+        // Cargar la escena solo si aún no se ha llamado
+        if (!hasSkipped)
+        {
+            hasSkipped = true;
+        }
+        SceneManager.LoadScene("City");
     }
 }
